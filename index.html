@@ -22,7 +22,7 @@
 
       .form {
         width: 100%;
-        max-width: 330px;
+        max-width: 400px;
         padding: 15px;
         margin: auto;
       }
@@ -49,24 +49,84 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
+
+      .form-radio
+      {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          display: inline-block;
+          position: relative;
+          background-color: #ffffff;
+          color: #666;
+          top: 10px;
+          height: 30px;
+          width: 30px;
+          border: 0;
+          border-radius: 50px;
+          cursor: pointer;     
+          margin-right: 7px;
+          outline: none;
+      }
+      .form-radio:checked::before
+      {
+          position: absolute;
+          font: 13px/1 'Open Sans', sans-serif;
+          left: 11px;
+          top: 7px;
+          content: '\02143';
+          transform: rotate(40deg);
+      }
+      .form-radio:hover
+      {
+          background-color: #f7f7f7;
+      }
+      .form-radio:checked
+      {
+          background-color: #f1f1f1;
+      }
+      label
+      {
+          font: 300 16px/1.7 'Open Sans', sans-serif;
+          color: #666;
+          cursor: pointer;
+      } 
+
     </style>
   </head>
   <body class="text-center">
     <form class="form">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox mb-3">
+      <h1 class="h3 mb-3 font-weight-normal">Machinist Calculator</h1>
+      <label for="wsi" class="sr-only">Wire Size</label>
+      <input type="text" id="wsi" class="form-control" placeholder="Wire Size" required autofocus>
+
+      <label for="thd" class="sr-only">Pitch or TPI</label>
+      <input type="text" id="thd" class="form-control" placeholder="Pitch or TPI" required autofocus>
+      <div class="radio mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="radio" name="thds" id="pit" class="form-radio"> Pitch
+        </label>
+        <label>
+          <input type="radio" name="thds" id="tpi" class="form-radio"> TPI
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Go</button>
+
+      <label for="wmi" class="sr-only">Wire Measurement</label>
+      <input type="text" id="wmi" class="form-control" placeholder="Wire Measurement" required autofocus>
+
+      <label for="pdi" class="sr-only">Pitch Diameter</label>
+      <input type="text" id="pdi" class="form-control" placeholder="Pitch Diameter" required autofocus>
+        <i>Solve for: </i><br>
+        <label>
+          <input type="radio" name="answ" id="wm" class="form-radio"> Wire Measurement
+        </label>
+        <label>
+          <input type="radio" name="answ" id="pd" class="form-radio"> Pitch Diameter
+        </label>
+      <button class="btn btn-lg btn-primary btn-block" onclick="document.getElementById('ans').innerHTML = Calc();">Go</button>
       <p class="mt-5 mb-3 text-muted">&copy; Erudition Labs 2018</p>
     </form>
-    <h1>Hello World!</h1>
+    <h1 id="ans"></h1>
     <!-- All of the Node.js APIs are available in this renderer process.
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
