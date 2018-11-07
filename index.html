@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <style>
-      html,
+
+<head>
+  <meta charset="UTF-8">
+  <title>Machinist Calculator</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    html,
       body {
         height: 100%;
       }
@@ -93,84 +94,86 @@
       } 
 
     </style>
-  </head>
-  <body class="text-center">
-    <form class="form">
-      <h1 class="h3 mb-3 font-weight-normal">Machinist Calculator</h1>
-      <label for="wsi" class="sr-only">Wire Size</label>
-      <input type="text" id="wsi" class="form-control" placeholder="Wire Size" required autofocus>
+</head>
 
-      <label for="thd" class="sr-only">Pitch or TPI</label>
-      <input type="text" id="thd" class="form-control" placeholder="Pitch or TPI" required autofocus>
-      <div class="radio mb-3">
-        <label>
-          <input type="radio" name="thds" id="pit" class="form-radio"> Pitch
-        </label>
-        <label>
-          <input type="radio" name="thds" id="tpi" class="form-radio"> TPI
-        </label>
-      </div>
+<body class="text-center">
+  <form class="form">
+    <h1 class="h3 mb-3 font-weight-normal">Machinist Calculator</h1>
+    <label for="wsi" class="sr-only">Wire Size</label>
+    <input type="text" id="wsi" class="form-control" placeholder="Wire Size" required autofocus>
 
-      <label for="wmi" class="sr-only">Wire Measurement</label>
-      <input type="text" id="wmi" class="form-control" placeholder="Wire Measurement" required autofocus>
+    <label for="thd" class="sr-only">Pitch or TPI</label>
+    <input type="text" id="thd" class="form-control" placeholder="Pitch or TPI" required autofocus>
+    <div class="radio mb-3">
+      <label>
+        <input type="radio" name="thds" id="pit" class="form-radio"> Pitch
+      </label>
+      <label>
+        <input type="radio" name="thds" id="tpi" class="form-radio"> TPI
+      </label>
+    </div>
 
-      <label for="pdi" class="sr-only">Pitch Diameter</label>
-      <input type="text" id="pdi" class="form-control" placeholder="Pitch Diameter" required autofocus>
-        <i>Solve for: </i><br>
-        <label>
-          <input type="radio" name="answ" id="wm" class="form-radio"> Wire Measurement
-        </label>
-        <label>
-          <input type="radio" name="answ" id="pd" class="form-radio"> Pitch Diameter
-        </label>
-      <button class="btn btn-lg btn-primary btn-block" onclick="document.getElementById('ans').innerHTML = Calc();">Go</button>
-      <p class="mt-5 mb-3 text-muted">&copy; Erudition Labs 2018</p>
-    </form>
-    <h1 id="ans"></h1>
-    <!-- All of the Node.js APIs are available in this renderer process.
+    <label for="wmi" class="sr-only">Wire Measurement</label>
+    <input type="text" id="wmi" class="form-control" placeholder="Wire Measurement" required autofocus>
+
+    <label for="pdi" class="sr-only">Pitch Diameter</label>
+    <input type="text" id="pdi" class="form-control" placeholder="Pitch Diameter" required autofocus>
+    <i>Solve for: </i><br>
+    <label>
+      <input type="radio" name="answ" id="wm" class="form-radio"> Wire Measurement
+    </label>
+    <label>
+      <input type="radio" name="answ" id="pd" class="form-radio"> Pitch Diameter
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" onclick="document.getElementById('ans').innerHTML = Calc();">Go</button>
+    <p class="mt-5 mb-3 text-muted">&copy; Erudition Labs 2018</p>
+  </form>
+  <h1 id="ans"></h1>
+  <!-- All of the Node.js APIs are available in this renderer process.
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>. -->
-    <script type="text/javascript">  
-      function Calc() {   
-         var wsx = document.getElementById('wsi').value;
-         var ptx = document.getElementById('thd').value;
-         var pdx = document.getElementById('pdi').value;
-         var wmx = document.getElementById('wmi').value;
-         var ptr = document.getElementById('pit').checked;
-         var tpr = document.getElementById('tpi').checked;
-         var wmr = document.getElementById('wm').checked;
-         var pdr = document.getElementById('pd').checked;
-      
-         if(tpr == true){
-            ptx = 1/ptx;
-         }
-         if(ptr != true && tpr != true){
-         alert('Please select Pitch or TPI.');
-         }
-         if(wmr != true && pdr != true){
-         alert('Please select Wire measurement or Pitch Diameter');
-         }
-         
-         var wiresol = 3 * +wsx;
-         var pitchsol = .866025 * +ptx;
-         Math.round(wiresol*100000)/100000;
-         Math.round(pitchsol*100000)/100000;
-         
-         if(wmr == true){
-         return(Math.round(((+pdx - +pitchsol) + +wiresol)*100000)/100000);
-         }
-         if(pdr == true){
-         //return((wmx+pitchsol));
-         return(Math.round(((+wmx + +pitchsol) - +wiresol)*100000)/100000);
-         }
-      
-      return(wsx);   
+  <script type="text/javascript">
+    function Calc() {
+      var wsx = document.getElementById('wsi').value;
+      var ptx = document.getElementById('thd').value;
+      var pdx = document.getElementById('pdi').value;
+      var wmx = document.getElementById('wmi').value;
+      var ptr = document.getElementById('pit').checked;
+      var tpr = document.getElementById('tpi').checked;
+      var wmr = document.getElementById('wm').checked;
+      var pdr = document.getElementById('pd').checked;
+
+      if (tpr == true) {
+        ptx = 1 / ptx;
       }
-      </script>
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+      if (ptr != true && tpr != true) {
+        alert('Please select Pitch or TPI.');
+      }
+      if (wmr != true && pdr != true) {
+        alert('Please select Wire measurement or Pitch Diameter');
+      }
+
+      var wiresol = 3 * +wsx;
+      var pitchsol = .866025 * +ptx;
+      Math.round(wiresol * 100000) / 100000;
+      Math.round(pitchsol * 100000) / 100000;
+
+      //if (wmr == true) {
+       // return (Math.round(((+pdx - +pitchsol) + +wiresol) * 100000) / 100000);
+      //}
+      if (pdr == true) {
+        //return((wmx+pitchsol));
+        return (Math.round(((+wmx + +pitchsol) - +wiresol) * 100000) / 100000);
+      }
+
+      return (wsx);
+    }
+  </script>
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</body>
+
 </html>
